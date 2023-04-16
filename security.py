@@ -2,7 +2,7 @@ import face_recognition
 import cv2
 import os
 import numpy as np
-import datetime
+
 
 vcapture=  cv2.VideoCapture(0)
 
@@ -10,13 +10,10 @@ AuthUserImage = face_recognition.load_image_file("ayush.jpg")
 AuthUserImage_encoding = face_recognition.face_encodings(AuthUserImage)[0]
 knowfaceEncoding = [AuthUserImage_encoding]
 knownfaceName = ["ayush"]
-students = knownfaceName.copy()
-
 facelocation = []
 faceencodings = []
-facenames = []
 s = True
-time = datetime.datetime.now()
+
 
 while True:
     _,frame = vcapture.read()
@@ -32,9 +29,8 @@ while True:
             facedistance = face_recognition.face_distance(knowfaceEncoding,faceencoding)
             best_matches_index =  np.argmin(facedistance)
             if matches[best_matches_index]:
-                names = knownfaceName[best_matches_index]
+                names = knownfaceName[best_matches_index]          
 
-            facenames.append(names)
             if names in knownfaceName:
                 os.system("shutdown /a")
             else:
